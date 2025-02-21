@@ -1,3 +1,14 @@
+## Diagrama del Flujo del Proyecto
+
+```mermaid
+flowchart TD
+  A[Inicio] --> B[Ejecuta script SQL]
+  B --> C{¿Datos Insertados?}
+  C -- Sí --> D[Genera reportes]
+  C -- No --> E[Muestra error]
+  D --> F[Fin]
+  E --> F
+
 # SQL-X
 
 This project contains SQL scripts for managing a database similar to a social network like Twitter. The database includes tables for users, followers, tweets, and likes. Below are the expected results for some of the queries:
