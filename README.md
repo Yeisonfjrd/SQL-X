@@ -74,3 +74,9 @@ graph LR
 
         Data Access Layer --> Database Layer
     end
+
+---  <-- **Asegúrate de que haya esta línea en blanco aquí**
+
+# SQL-X
+
+Este proyecto contiene scripts SQL para gestionar una base de datos similar a una red social tipo Twitter. La base de datos incluye tablas para usuarios, seguidores, tweets y likes.
