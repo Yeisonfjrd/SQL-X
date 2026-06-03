@@ -1,78 +1,38 @@
-# SQL-X
+# SQL-X — A Twitter-like social network database management system using SQL scripts
+## Overview
+SQL-X is a project that provides SQL scripts to manage a database similar to a Twitter-like social network. The database includes tables for users, followers, tweets, and likes, and provides a basic structure for managing these entities. This project aims to provide a simple and efficient way to manage a social network database using SQL.
 
-Este proyecto contiene scripts SQL para gestionar una base de datos similar a una red social tipo Twitter. La base de datos incluye tablas para usuarios, seguidores, tweets y likes.
+## Tech Stack
+* MySQL
+* SQL
 
----
+## Prerequisites
+To use SQL-X, you need to have MySQL installed on your system.
 
-## Diagrama de Arquitectura del Proyecto
+## Getting Started
+To get started with SQL-X, clone the repository, create a new MySQL database, and run the SQL scripts provided in the repository. You can do this by running the following commands:
+```bash
+git clone https://github.com/your-username/SQL-X.git
+mysql -u your-username -p your-password
+CREATE DATABASE sql_x;
+USE sql_x;
+SOURCE path/to/SQL-X/sql-scripts.sql
+```
 
-```mermaid
-graph LR
-    subgraph "Twitter Clone System"
-        subgraph "Data Access Layer"
-            direction TB
-            subgraph "User Queries"
-                direction TB
-                UserQueriesSQL["User Queries\n(SQL)"]
-                style UserQueriesSQL fill:#f9f,stroke:#333,stroke-width:2px
-                UserQueriesSQL --> Queries["Queries"]
-            end
-            subgraph "Analytics Queries"
-                direction TB
-                AnalyticsQueriesSQL["Analytics Queries\n(SQL)"]
-                style AnalyticsQueriesSQL fill:#f9f,stroke:#333,stroke-width:2px
-                AnalyticsQueriesSQL --> AggregateCounts["Aggregate\nCounts"]
-            end
-            subgraph "Tweet Queries"
-                direction TB
-                TweetQueriesSQL["Tweet Queries\n(SQL)"]
-                style TweetQueriesSQL fill:#f9f,stroke:#333,stroke-width:2px
-                TweetQueriesSQL --> QueriesTweets["Queries"]
-            end
-        end
+## Environment Variables
+| Variable | Default | Description |
+| --- | --- | --- |
+| DB_HOST | localhost | MySQL host |
+| DB_PORT | 3306 | MySQL port |
+| DB_USER | root | MySQL username |
+| DB_PASSWORD | password | MySQL password |
+| DB_NAME | sql_x | MySQL database name |
 
-        subgraph "Database Layer"
-            direction TB
-            subgraph "Database Components"
-                direction TB
-                subgraph "User Management"
-                    direction TB
-                    UserManagement["User Management\n(users table)"]
-                    style UserManagement fill:#ccf,stroke:#333,stroke-width:2px
-                    UserManagement --> RefUsers["References\n(1:N)"]
-                end
-                subgraph "Follower Management"
-                    direction TB
-                    FollowerManagement["Follower Management\n(followers table)"]
-                    style FollowerManagement fill:#ccf,stroke:#333,stroke-width:2px
-                    FollowerManagement --> ReferencesFollowers["References\n(1:N)"]
-                    FollowerManagement --> Validates["Validates via\nPrevent Self-Follow Trigger"]
-                end
-                subgraph "Tweet Management"
-                    direction TB
-                    TweetManagement["Tweet Management\n(tweets table)"]
-                    style TweetManagement fill:#ccf,stroke:#333,stroke-width:2px
-                    TweetManagement --> RefTweets["References\n(1:N)"]
-                end
-                subgraph "Like Management"
-                    direction TB
-                    LikeManagement["Like Management\n(likes table)"]
-                    style LikeManagement fill:#ccf,stroke:#333,stroke-width:2px
-                    LikeManagement --> PointLiked["Points to liked tweets"]
-                end
-            end
-            DatabaseMySQL["Main Database\n(MySQL)"]
-            style DatabaseMySQL fill:#bea,stroke:#333,stroke-width:2px
-            DatabaseComponents --> DatabaseMySQL
-        end
+## Testing
+To test the SQL scripts, you can run the following command:
+```bash
+mysql -u your-username -p your-password sql_x < path/to/SQL-X/test-scripts.sql
+```
 
-        ExternalUser["External User"]
-        style ExternalUser fill:#87cefa,stroke:#333,stroke-width:2px
-
-        ExternalUser -- Follows --> FollowerManagement
-        ExternalUser -- Creates Likes --> LikeManagement
-
-        UserQueriesSQL --> DatabaseMySQL
-        AnalyticsQueriesSQL --> DatabaseMySQL
-        TweetQueriesSQL --> DatabaseMySQL
-    end
+## Contributing
+If you want to contribute to SQL-X, please fork the repository, make your changes, and submit a pull request. Make sure to include a detailed description of your changes and any relevant testing or documentation updates.
